@@ -1,12 +1,10 @@
-﻿
-
-namespace AutomationFramework.PageConstants
+﻿namespace AutomationFramework.PageConstants
 {
     public class LabcorpCareerSearchConstantPage
     {
         public const string CareersLink = "Careers";
         public const string SearchBoxForJobTitleOrLocation = "//input[@type='text' and @id = 'typehead']";
-        public const string ClickOnSubmitButton = "//button[@type = 'submit']";
+        public const string ClickOnSubmitButton = "#ph-search-backdrop";
         public const string ClickOnJobTitle = "//a[@data-ph-at-job-title-text = 'QA Test Automation Developer']";
         public const string VerifyJobTitle = "//div/h1[@class = 'job-title']";
         public const string VerifyJobLocation = "//span[2]/span[@class = 'au-target job-location']";

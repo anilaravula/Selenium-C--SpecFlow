@@ -4,13 +4,14 @@ using OpenQA.Selenium.Chrome;
 
 namespace AutomationFramework
 {
+    [SetUpFixture]
     public class Driver
     {
         public static IWebDriver Instance { get; set; }
 
         public static string BaseUrl { get; set; } = "https://www.labcorp.com/";
 
-        [SetUp]
+        [OneTimeSetUp]
         public static void Initialize()
         {
             if (Instance != null)
@@ -27,7 +28,7 @@ namespace AutomationFramework
 
             Instance.Manage().Window.Maximize();
 
-            Instance.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            SetImplicitWait(5);
         }
 
         [OneTimeTearDown]
@@ -60,7 +61,7 @@ namespace AutomationFramework
 
         public static bool IsTextPresentOnEntirePage(string text)
         {
-            var element = Driver.Instance.FindElement(By.TagName("html"));
+            var element = Instance.FindElement(By.TagName("html"));
 
             if (element.Displayed && element.Text.Contains(text))
                 return true;
@@ -71,6 +72,16 @@ namespace AutomationFramework
         {
             var e = Instance.FindElement(bBy);
             ((IJavaScriptExecutor)Instance).ExecuteScript("arguments[0].scrollIntoView(true);", e);
+        }
+
+        public static void WaitExplicitly(TimeSpan timeSpan)
+        {
+            Thread.Sleep((int)(timeSpan.TotalSeconds * 1000));
+        }
+
+        public static void SetImplicitWait(int seconds)
+        {
+            Instance.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(seconds);
         }
     }
 }

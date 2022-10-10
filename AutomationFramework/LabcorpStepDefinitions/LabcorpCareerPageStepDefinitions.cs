@@ -32,9 +32,9 @@ namespace AutomationFramework.LabcorpStepDefinitions
             searchBox.Clear();
             searchBox.SendKeys(LabcorpCareerData.JobRole + Keys.Enter);
 
-            Driver.Instance.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            Driver.WaitExplicitly(TimeSpan.FromSeconds(5));
 
-            Driver.Instance.FindElement(By.XPath(PageConstants.LabcorpCareerSearchConstantPage.ClickOnSubmitButton)).Click();
+            Driver.Instance.FindElement(By.CssSelector(PageConstants.LabcorpCareerSearchConstantPage.ClickOnSubmitButton)).Click();
 
             Driver.Instance.FindElement(By.XPath(PageConstants.LabcorpCareerSearchConstantPage.ClickOnJobTitle)).Click();
         }
@@ -77,7 +77,7 @@ namespace AutomationFramework.LabcorpStepDefinitions
 
             Driver.ScrollIntoView(By.XPath(PageConstants.LabcorpCareerSearchConstantPage.VerifyJobId));
 
-            Driver.Instance.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
+            Driver.SetImplicitWait(3);
 
             Driver.Instance.FindElement(By.XPath(PageConstants.LabcorpCareerSearchConstantPage.GoBackToResults)).Click();
         }
